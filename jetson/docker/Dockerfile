@@ -10,7 +10,8 @@ RUN groupadd --gid ${USER_GID} ${USERNAME} \
     && mkdir /home/${USERNAME}/.config && chown ${USER_UID}:${USER_GID} /home/${USERNAME}/.config
 
 # Set up sudo
-RUN apt-get update \
+RUN rm -f /etc/apt/sources.list.d/ros2.list \
+    && apt-get update \
     && apt-get install -y sudo \
     && echo "${USERNAME} ALL=(ALL) NOPASSWD:ALL" > /etc/sudoers.d/${USERNAME} \
     && chmod 0440 /etc/sudoers.d/${USERNAME} \
