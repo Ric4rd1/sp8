@@ -1,0 +1,52 @@
+// Pins
+#define PWM_PIN_IN1 33     // Driver In 1
+#define PWM_PIN_IN2 32     // Driver In 2
+
+// PWM configurations
+#define PWM_FRQ 5000   // PWM frequency (Hz)
+#define PWM_RES 8      // PWM resolution (bits)
+#define PWM_CHNL0 0     // PWM channel for in 1
+#define PWM_CHNL1 1     // PWM channel for in 2
+
+float vel = 0.0;
+
+void setup() {
+  Serial.begin(115200);
+  // Configure PWM
+  // Set pins as output
+  pinMode(PWM_PIN_IN1, OUTPUT); 
+  pinMode(PWM_PIN_IN2, OUTPUT);
+  // Configure pwm channel
+  ledcSetup(PWM_CHNL0, PWM_FRQ, PWM_RES); 
+  ledcSetup(PWM_CHNL1, PWM_FRQ, PWM_RES);
+  // Assign pins
+  ledcAttachPin(PWM_PIN_IN1, PWM_CHNL0);
+  ledcAttachPin(PWM_PIN_IN2, PWM_CHNL1);
+
+}
+
+void loop() {
+  if (Serial.available()>0) {
+    vel = Serial.parseFloat();
+    vel = constrain(vel, -1.0, 1);
+    Serial.print("Vel: "); Serial.println(vel);
+
+    if (vel >= 0) {
+    int pwm = floatMap(vel, 0.0, 1.0, 0, 255);
+    Serial.print("PWM: "); Serial.println(pwm);
+    ledcWrite(PWM_CHNL0, pwm); //
+    ledcWrite(PWM_CHNL1, 0); // set to 0
+    }else{
+      int pwm = floatMap(vel, -1.0, 0.0, 0, 255);
+      Serial.print("PWM: "); Serial.println(pwm);
+      ledcWrite(PWM_CHNL1, pwm); //
+      ledcWrite(PWM_CHNL0, 0); // set to 0
+    }
+
+  }
+
+}
+
+int floatMap(float x, float in_min, float in_max, float out_min, float out_max) {
+  return (int)((x - in_min) * (out_max - out_min) / (in_max - in_min) + out_min);
+}
