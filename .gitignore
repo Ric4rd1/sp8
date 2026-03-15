@@ -1,0 +1,29 @@
+# Build system and install artifacts
+build/
+install/
+log/
+*.log
+
+# ROS 2 overlay workspace stuff
+.colcon/
+colcon_install_layout.*
+
+# Python bytecode
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# CMake
+CMakeFiles/
+CMakeCache.txt
+cmake_install.cmake
+Makefile
+
+# ROS-specific
+ament_cmake_environment_hooks/
+local_setup.*
+*.launch.pyc
+
+# VSCode config
+.vscode/
