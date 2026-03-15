@@ -18,4 +18,4 @@ RUN rm -f /etc/apt/sources.list.d/ros2.list \
     && rm -rf /var/lib/apt/lists/*
 
 # USER ${USERNAME}
-WORKDIR /home/${USERNAME}
+WORKDIR /home/${USERNAME}/sp8_ws
