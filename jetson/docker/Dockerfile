@@ -17,5 +17,10 @@ RUN rm -f /etc/apt/sources.list.d/ros2.list \
     && chmod 0440 /etc/sudoers.d/${USERNAME} \
     && rm -rf /var/lib/apt/lists/*
 
-# USER ${USERNAME}
+# Copy bashrc with autocompletions and colored prompt
+COPY .bashrc /root/.bashrc
+RUN cp /root/.bashrc /home/${USERNAME}/.bashrc \
+    && chown ${USERNAME}:${USERNAME} /home/${USERNAME}/.bashrc
+
+USER ${USERNAME}
 WORKDIR /home/${USERNAME}/sp8_ws
