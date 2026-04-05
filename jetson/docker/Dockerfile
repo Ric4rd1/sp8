@@ -22,5 +22,7 @@ COPY .bashrc /root/.bashrc
 RUN cp /root/.bashrc /home/${USERNAME}/.bashrc \
     && chown ${USERNAME}:${USERNAME} /home/${USERNAME}/.bashrc
 
+RUN pip3 install pyserial
+
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}/sp8_ws
