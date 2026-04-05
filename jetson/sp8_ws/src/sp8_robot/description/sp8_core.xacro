@@ -4,7 +4,7 @@
     <xacro:include filename="inertial_macros.xacro"/>
 
     <material name="white">
-        <color rgba="1.0 1.0 1.0 1.0"/>
+        <color rgba="1.0 1.0 1.0 0.7"/>
     </material>
 
     <material name="black">
