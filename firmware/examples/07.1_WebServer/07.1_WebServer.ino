@@ -285,6 +285,11 @@ void loop() {
     lAngVel = getAngVel(ln, lnant, dt);
     rAngVel = getAngVel(rn, rnant, dt);
 
+    // Send Angular velocities through serial 
+    char buffer[120];
+    sprintf(buffer, "ang_vel_l: %.4f, ang_vel_r: %.4f", lAngVel, rAngVel);
+    Serial.println(buffer);
+
     // Calculate and send control signal to motors
     pid(lsetpoint, lAngVel, le, lu, PWM_CHNL1, PWM_CHNL0); // Left motor
     pid(rsetpoint, rAngVel, re, ru, PWM_CHNL2, PWM_CHNL3); // Right motor
