@@ -17,6 +17,15 @@ RUN rm -f /etc/apt/sources.list.d/ros2.list \
     && chmod 0440 /etc/sudoers.d/${USERNAME} \
     && rm -rf /var/lib/apt/lists/*
 
+# Install YDLIDAR SDK 
+RUN git clone https://github.com/YDLIDAR/YDLidar-SDK.git /tmp/YDLidar-SDK \
+    && mkdir /tmp/YDLidar-SDK/build \
+    && cd /tmp/YDLidar-SDK/build \
+    && cmake .. \
+    && make -j$(nproc) \
+    && make install \
+    && rm -rf /tmp/YDLidar-SDK
+
 # Copy bashrc with autocompletions and colored prompt
 COPY .bashrc /root/.bashrc
 RUN cp /root/.bashrc /home/${USERNAME}/.bashrc \
