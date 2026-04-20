@@ -61,35 +61,24 @@ class SerialMotorDriver(Node):
 
         try:
             if self.ser.in_waiting > 0:
-                line = self.ser.readline().decode('utf-8').strip()
-                #self.get_logger().info(f"Received: {line}")
+                line = self.ser.readline().decode('utf-8', errors='ignore').strip()
+                #self.get_logger().info(f"RAW: {line}")
 
-                # Expected:
-                # ang_vel_l: 1.2345, ang_vel_r: 1.5678
+                if not line:
+                    return
 
                 parts = line.split(',')
 
-                wl = None
-                wr = None
+                if len(parts) != 2:
+                    return  # línea incompleta o corrupta
 
-                for part in parts:
-                    key, value = part.split(':')
-                    key = key.strip()
-                    value = value.strip()
+                wl, wr = map(float, parts)
 
-                    if key == 'ang_vel_l':
-                        wl = float(value)
-                    elif key == 'ang_vel_r':
-                        wr = float(value)
+                self.msg_l.data = wl
+                self.msg_r.data = wr
 
-                if wl is not None and wr is not None:
-                    
-                    self.msg_l.data = wl   # left wheel
-                    self.msg_r.data = wr   # right wheel
-
-                    self.l_wheel_pub.publish(self.msg_l)
-                    self.r_wheel_pub.publish(self.msg_r)
-
+                self.l_wheel_pub.publish(self.msg_l)
+                self.r_wheel_pub.publish(self.msg_r)
         except Exception as e:
             self.get_logger().warn(f"Read/parse error: {e}")
 
