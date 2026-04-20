@@ -31,6 +31,8 @@ class SerialMotorDriver(Node):
             self.cmd_callback,
             10
         )
+        # Publisher
+
 
     def cmd_callback(self, msg: Twist):
         if self.ser is None:

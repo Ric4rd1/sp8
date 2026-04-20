@@ -9,7 +9,7 @@ endif()
 find_package(ament_cmake REQUIRED)
 # uncomment the following section in order to fill in
 # further dependencies manually.
-find_package(xacro REQUIRED)
+#find_package(xacro REQUIRED)
 
 if(BUILD_TESTING)
   find_package(ament_lint_auto REQUIRED)
