@@ -27,7 +27,7 @@ def generate_launch_description():
 
     serial_port = LaunchConfiguration('serial_port')
     lidar_port = LaunchConfiguration('lidar_port')
-
+    '''
     xacro_file_name = 'sp8.urdf.xacro'
     xacro_file = os.path.join(
         get_package_share_directory('sp8_robot'),
@@ -35,6 +35,16 @@ def generate_launch_description():
         xacro_file_name)
     
     robot_description_raw = xacro.process_file(xacro_file).toxml()
+    '''
+    urdf_file_name = 'sp8.urdf'
+    urdf_file = os.path.join(
+        get_package_share_directory('sp8_robot'),
+        'description',
+        urdf_file_name)
+    
+    # Read the file natively using standard Python
+    with open(urdf_file, 'r') as infp:
+        robot_description_raw = infp.read()
 
     motor_controller_node = Node(
                                 package='serial_motor_driver',
