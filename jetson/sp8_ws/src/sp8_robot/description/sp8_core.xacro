@@ -13,14 +13,14 @@
 
     <!-- BASE FOOTPRINT LINK-->
 
-    <link name="base_footprint_link">
+    <link name="base_footprint">
         
     </link>
 
     <!-- BASE LINK -->
 
-    <joint name="base_link_join" type="fixed">
-        <parent link="base_footprint_link"/>
+    <joint name="base_link_joint" type="fixed">
+        <parent link="base_footprint"/>
         <child link="base_link"/>
         <origin xyz="0.0 0.0 0.052"/> <!-- 0.052-->
     </joint>
