@@ -32,6 +32,7 @@ RUN cp /root/.bashrc /home/${USERNAME}/.bashrc \
     && chown ${USERNAME}:${USERNAME} /home/${USERNAME}/.bashrc
 
 RUN pip3 install pyserial
+RUN pip3 install transforms3d
 
 USER ${USERNAME}
 WORKDIR /home/${USERNAME}/sp8_ws
