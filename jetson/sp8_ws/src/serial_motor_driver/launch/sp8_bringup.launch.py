@@ -9,7 +9,7 @@ from launch.launch_description_sources import PythonLaunchDescriptionSource
 from launch.event_handlers import OnProcessExit, OnShutdown
 from launch.events import Shutdown
 from launch.substitutions import EnvironmentVariable, LocalSubstitution, LaunchConfiguration
-import xacro
+#import xacro
 
 def generate_launch_description():
 
