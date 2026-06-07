@@ -1,0 +1,20 @@
+<launch>
+    <arg name="use_sim_time" default="true"/>
+    <arg name="headless" default="false"/>
+    <arg name="map_path" default="$(find-pkg-share puzzlebot_navigation2)/maps/maze_map.yaml"/>
+    <arg name="nav2_params_file" default="$(find-pkg-share puzzlebot_navigation2)/config/nav2_params.yaml"/>
+
+    <include file="$(find-pkg-share puzzlebot_gazebo)/launch/puzzlebot_gazebo.launch.xml">
+        <arg name="headless" value="$(var headless)"/>
+    </include>
+
+    <timer period="5.0">
+        <include file="$(find-pkg-share puzzlebot_navigation2)/launch/nav2_core.launch.xml">
+            <arg name="use_sim_time" value="$(var use_sim_time)"/>
+            <arg name="rviz_config_path" value="$(find-pkg-share puzzlebot_navigation2)/rviz/nav2.rviz"/>
+            <arg name="map_path" value="$(var map_path)"/>
+            <arg name="nav2_params_file" value="$(var nav2_params_file)"/>
+        </include>
+    </timer>
+
+</launch>

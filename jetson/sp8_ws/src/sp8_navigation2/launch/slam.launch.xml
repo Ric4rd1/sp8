@@ -1,0 +1,14 @@
+<launch>
+    <arg name="use_sim_time" default="true" />
+    <arg name="headless" default="false" />
+
+    <include file="$(find-pkg-share puzzlebot_gazebo)/launch/puzzlebot_gazebo.launch.xml">
+        <arg name="headless" value="$(var headless)" />
+    </include>
+
+    <include file="$(find-pkg-share puzzlebot_navigation2)/launch/slam_core.launch.xml" >
+        <arg name="slam_params_file" value="$(find-pkg-share puzzlebot_navigation2)/config/slam_toolbox.yaml" />
+        <arg name="rviz_config_path" value="$(find-pkg-share puzzlebot_navigation2)/rviz/slam.rviz" />
+        <arg name="use_sim_time" value="true" />
+    </include>
+</launch>
