@@ -15,13 +15,13 @@ def generate_launch_description():
 
     serial_port_arg = DeclareLaunchArgument(
         'serial_port',
-        default_value='/dev/ttyUSB0',
+        default_value='/dev/ttyUSB1',
         description='Serial port for the micro-ROS agent'
     )
 
     lidar_port_arg = DeclareLaunchArgument(
         'lidar_port',
-        default_value='/dev/ttyUSB1',
+        default_value='/dev/ttyUSB0',
         description='Serial port for the rplidar a1'
     )
 
@@ -72,8 +72,8 @@ def generate_launch_description():
     ydlidar_driver_launch = IncludeLaunchDescription(
         PythonLaunchDescriptionSource(ydlidar_launch_path),
         launch_arguments={
+            'params_file': ydlidar_params_file,
             'port': lidar_port,
-            'params_file': ydlidar_params_file
         }.items()
     )
     
