@@ -1,7 +1,7 @@
 <launch>
-    <arg name="slam_params_file" default="$(find-pkg-share puzzlebot_navigation2)/config/slam_toolbox.yaml" />
-    <arg name="rviz_config_path" default="$(find-pkg-share puzzlebot_navigation2)/rviz/slam.rviz" />
-    <arg name="use_sim_time" default="true" />
+    <arg name="slam_params_file" default="$(find-pkg-share sp8_navigation2)/config/slam_toolbox.yaml" />
+    <arg name="rviz_config_path" default="$(find-pkg-share sp8_navigation2)/rviz/slam.rviz" />
+    <arg name="use_sim_time" default="false" />
 
     <node pkg="slam_toolbox" exec="async_slam_toolbox_node" name="slam_toolbox" output="screen">
         <param name="use_sim_time" value="$(var use_sim_time)" />
